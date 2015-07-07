@@ -9,6 +9,15 @@
 /test/version_tmp/
 /tmp/
 
+.DS_Store
+log/**/*
+tmp/**/*
+vendor/gems/*
+!vendor/gems/cache/
+.sass-cache/*
+db/*.db
+.*.sw*
+
 ## Specific to RubyMotion:
 .dat*
 .repl_history
