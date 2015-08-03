@@ -1,0 +1,138 @@
+/*
+
+My Custom CSS
+=============
+
+Author:  Yumeng
+Updated: July 2015
+Notes:	 Hand coded for umi
+
+*/
+
+
+/* --------------------------------------
+   Layout
+   -------------------------------------- */
+footer {
+   background: #EEE;
+   color: #333;
+   font-size: 11px;
+   padding: 20px;
+
+}
+
+#copyright{
+   text-align: center;
+}
+
+
+/* --------------------------------------
+   Modal
+   -------------------------------------- */
+ 
+
+
+/* --------------------------------------
+   Navbar
+   -------------------------------------- */
+.navbar-brand{
+   padding: 13px 15px;
+}
+   
+   
+/* --------------------------------------
+   Carousel
+   -------------------------------------- */
+#promotion{
+   margin-top: 60px;
+}
+
+#promotion .item{
+   height: 200px;
+}
+
+#slide1 {
+   background: url('../../images/carousel_medium_01.jpg') top center no-repeat;
+}
+
+#slide2 {
+   background: url('../../images/carousel_medium_01.jpg') top center no-repeat;
+}
+
+#slide3 {
+   background: url('../../images/carousel_medium_01.jpg') top center no-repeat;
+}
+
+
+
+
+/* --------------------------------------
+   Food List
+   -------------------------------------- */
+
+#filter{
+   margin-top: 30px;
+   text-align: center;
+   font-size:40pt;
+}
+
+#foodList{
+   margin-top: 30px;
+   margin-bottom: 30px;
+}
+
+#item{
+   padding: 10px;
+}
+
+/* --------------------------------------
+   Global Styles
+   -------------------------------------- */
+
+
+/* --------------------------------------
+   Media Queries
+   -------------------------------------- */
+
+/* Portrait & landscape phone */
+@media (max-width: 480px) {
+
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 768px) {
+   #promotion .item{
+      height: 155px;
+   }
+
+   #slide1 {
+      background: url('../../images/carousel_small_01.jpg') top center no-repeat;
+   }
+
+   #slide2 {
+      background: url('../../images/carousel_small_01.jpg') top center no-repeat;
+   }
+
+   #slide3 {
+      background: url('../../images/carousel_small_01.jpg') top center no-repeat;
+   }
+}
+
+/* Large desktop */
+@media (min-width: 1200px) {
+#promotion .item{
+   height: 250px;
+}
+
+#slide1 {
+   background: url('../../images/carousel_large_01.jpg') top center no-repeat;
+}
+
+#slide2 {
+   background: url('../../images/carousel_large_01.jpg') top center no-repeat;
+}
+
+#slide3 {
+   background: url('../../images/carousel_large_01.jpg') top center no-repeat;
+}
+}

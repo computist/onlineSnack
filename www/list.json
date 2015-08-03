@@ -1,0 +1,21 @@
+
+{
+  "name": "a",
+  "description": "some description",
+  "price": 10,
+  "reviews": [
+    {
+      "star": 5,
+      "body": "I LOVE IT",
+      "author": "a@gmail.com"
+    },
+    {
+      "star": 5,
+      "body": "I LOVE IT",
+      "author": "a@gmail.com"
+    }
+  ],
+  "images": [
+    "http://www.ladym.com/wp-content/uploads/2012/04/ladym_millecrepe_slice_h2.jpg"
+  ]
+}
