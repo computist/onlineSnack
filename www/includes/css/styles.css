@@ -72,8 +72,7 @@ footer {
 
 #filter{
    margin-top: 30px;
-   text-align: center;
-   font-size:40pt;
+   font-size:10pt;
 }
 
 #foodList{
@@ -81,7 +80,7 @@ footer {
    margin-bottom: 30px;
 }
 
-#item{
+#product{
    padding: 10px;
 }
 
