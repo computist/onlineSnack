@@ -14,9 +14,11 @@
 ActiveRecord::Schema.define(version: 2) do
 
   create_table "dishes", force: :cascade do |t|
-    t.string   "name",                   null: false
+    t.string   "name",                    null: false
     t.string   "location"
-    t.integer  "spicy",      default: 0
+    t.integer  "spicy",       default: 0
+    t.decimal  "rate"
+    t.integer  "rate_number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

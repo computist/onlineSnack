@@ -22,6 +22,16 @@ module Platform
 	      puts status
 	      return status
 	    end
+        
+        def validSorterOption(sorter_array)
+            options_array = ["name", "location", "spicy", "rate", "ratenumber"]
+            for i in 0..sorter_array.length-1
+                if !options_array.include?(sorter_array[i])
+                    return false
+                end
+            end
+            return true
+        end
     end
 
     helpers Helper

@@ -71,14 +71,42 @@ Platform::App.controllers  do
         spicy = value
       end
     end
-
+    @dishes = Dish.select(:name, :location, :spicy, :rate, :rate_number).where("spicy <= ?", spicy)
+    
     if params[:location]
-      locations = params[:location].strip.split(",");
-      @dishes = Dish.select(:name, :location, :spicy).where("spicy <= ?", spicy).where(location: locations)
-    else
-      @dishes = Dish.select(:name, :location, :spicy).where("spicy <= ?", spicy)
+      locations = params[:location].strip.split(",")
+      @dishes = @dishes.where(location: locations)
     end
-
+    
+    sort_string = ""
+    if params[:sort_asc] && !params[:sort_asc].blank?
+      sorter_asc = params[:sort_asc].strip.split(",")
+      if validSorterOption(sorter_asc)
+          for i in 0..sorter_asc.length-1
+             sort_string = sort_string + sorter_asc[i] + " asc,"
+          end
+      end
+    end
+    
+    if params[:sort_desc] && !params[:sort_desc].blank?
+        sorter_desc = params[:sort_desc].strip.split(",")
+        if validSorterOption(sorter_desc)
+            for i in 0..sorter_desc.length-1
+                sort_string = sort_string + sorter_desc[i] + " desc,"
+            end
+        end
+    end
+    
+    if sort_string.length > 7
+        if sort_string[sort_string.length-1] == ","
+            sort_string = sort_string[0..sort_string.length-2]
+        end
+    end
+    
+    if sort_string.length > 7
+        @dishes = @dishes.order(sort_string)
+    end
+    
     @dishes.to_json
    end
 end

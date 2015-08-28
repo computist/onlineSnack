@@ -4,6 +4,8 @@ class CreateDishes < ActiveRecord::Migration
       t.string :name, null:false
       t.string :location
       t.integer :spicy, default:0
+      t.decimal :rate
+      t.integer :rate_number
       t.timestamps
     end
     add_index :dishes, :name,             unique: true
