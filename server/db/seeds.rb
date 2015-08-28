@@ -22,3 +22,7 @@ Dish.create(:name => "北京烤鸭", :location => "北京", :spicy => 0, :rate => 3.4,
 Dish.create(:name => "烤全羊", :location => "新疆", :spicy => 2, :rate => 4.3, :rate_number => 13)
 Dish.create(:name => "肠粉", :location => "广州", :spicy => 0, :rate => 3.2, :rate_number => 17)
 Dish.create(:name => "红烧武昌鱼", :location => "湖北", :spicy => 3, :rate => 3.9, :rate_number => 9)
+Dish.create(:name => "dish1", :location => "USA", :spicy => 1, :rate => 2.1, :rate_number => 21)
+Dish.create(:name => "dish2", :location => "USA", :spicy => 2, :rate => 3.2, :rate_number => 12)
+Dish.create(:name => "dish3", :location => "USA", :spicy => 1, :rate => 1.6, :rate_number => 19)
+Dish.create(:name => "dish4", :location => "USA", :spicy => 0, :rate => 2.4, :rate_number => 7)
