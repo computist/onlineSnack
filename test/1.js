@@ -1,4 +1,4 @@
-var host = "http://localhost:3000";
+var host = "http://52.10.176.132:3000";
 
 window.onload = function () {
 	document.getElementById("login").onclick = loginclick;
