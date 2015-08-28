@@ -1,4 +1,4 @@
-var host = "http://52.10.176.132:3000";
+var host = "http://localhost:3000";
 
 window.onload = function () {
 	document.getElementById("login").onclick = loginclick;
@@ -12,7 +12,7 @@ window.onload = function () {
 }
 
 function loginclick () {
-	var username = document.getElementById("username").value,
+	var username = document.getElementById("username").value.trim(),
 		password = document.getElementById("password").value;
 
 	useAjax(host + "/login?username="+username+"&password="+password, login);
@@ -67,6 +67,12 @@ function getdishclick () {
 
 	if (sort_desc.length > 0) {
 		url = url + "&sort_desc=" + sort_desc;
+	}
+
+	var start_item = document.getElementById("start_item").value.trim(),
+		end_item = document.getElementById("end_item").value.trim();
+	if (start_item && end_item && start_item != "" && end_item != "") {
+		url = url + "&start_item=" + start_item + "&end_item=" + end_item;
 	}
 	console.log(url);
 	useAjax(url, getdish);

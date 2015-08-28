@@ -106,6 +106,14 @@ Platform::App.controllers  do
     if sort_string.length > 7
         @dishes = @dishes.order(sort_string)
     end
+
+    if params[:start_item] && !params[:start_item].blank? && params[:end_item] && !params[:end_item].blank? 
+      start_item = params[:start_item].to_i
+      end_item = params[:end_item].to_i
+      if start_item > 0 && end_item > 0 && end_item > start_item
+        @dishes = @dishes.offset(start_item-1).limit(end_item - start_item + 1)
+      end
+    end
     
     @dishes.to_json
    end
