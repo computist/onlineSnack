@@ -1,3 +1,4 @@
+# encoding: GB18030
 # shell.say "Welcome to add dishes"
 # Yes = "Y"
 # while Yes == "Y"
