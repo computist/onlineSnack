@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Omi</title>
+</head>
+<body>
+	<div id="loginmessage">Login Message</div>
+	<div id="message">Validation Message</div>
+	Username: <input id="username" type="text" name="username" />
+	<br />
+	Password: <input id="password" type="password" name="password" />
+	<button id="login">Login</button>
+	<br />
+	<button id="logout">Logout</button>
+	<br />
+	<button id="getinfo">Validate login</button>
+	<br />
+
+	<div>
+	<h3>菜品</h3>
+		<label><input type="checkbox" class="location" value="四川">四川</label>
+		<label><input type="checkbox" class="location" value="重庆">重庆</label>
+		<label><input type="checkbox" class="location" value="湖北">湖北</label>
+		<label><input type="checkbox" class="location" value="北京">北京</label>
+		<label><input type="checkbox" class="location" value="新疆">新疆</label>
+	</div>
+	Spicy: <span id="spicy-value"></span> <input id="spicy" type="range" name="spicy" min="0" max="5" value="5"> 
+	<br />
+	<div>
+		Sort up: 
+		<label><input type="checkbox" class="sortup" value="spicy">spicy</label>
+		<label><input type="checkbox" class="sortup" value="rate">rate</label>
+		<label><input type="checkbox" class="sortup" value="rate_number">number of rate</label>
+		<br />
+		Sort down:
+		<label><input type="checkbox" class="sortdown" value="spicy">spicy</label>
+		<label><input type="checkbox" class="sortdown" value="rate">rate</label>
+		<label><input type="checkbox" class="sortdown" value="rate_number">number of rate</label>
+	</div>
+	<button id="getdish">Get dish</button>
+	<br />
+
+	<h2>Dishes</h2>
+
+
+	<table id="dishlist" style="width:100%; text-align:center; border=true">
+		  <tr>
+		    <th style="width:50%">Name</th>
+		    <th style="width:20%">Location</th>
+		    <th style="width:10%">Spicy</th>
+		    <th style="width:10%">Rate</th>
+		    <th style="width:10%">Number of Rate</th>
+		  </tr>
+	</table>
+
+	<script type="text/javascript" src="1.js"></script>
+</body>
+</html>
