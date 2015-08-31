@@ -107,7 +107,7 @@ function logout () {
 }
 
 function getinfo () {
-	useAjax(host, getmessage);
+	useAjax(host + "/test", getmessage);
 }
 
 function getmessage () {
