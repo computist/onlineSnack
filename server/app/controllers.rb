@@ -3,12 +3,12 @@ require 'json'
 require 'securerandom'
 
 Platform::App.controllers  do
-  before do
-    content_type :json
-  end
+#  before do
+#    content_type :json
+#  end
 
   get :index do
-       send_file 'views/index.html'
+      render 'index.html'
   end
   
   get '/test' do
