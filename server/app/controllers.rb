@@ -8,7 +8,7 @@ Platform::App.controllers  do
 #  end
 
   get :index do
-      render 'index.html'
+      render 'index'
   end
   
   get '/test' do
