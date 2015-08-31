@@ -8,12 +8,16 @@ Platform::App.controllers  do
   end
 
   get :index do
-    status = isLoggedIn
-    if status[:login]
-      "Suceess"
-    else
-      "Failed"
-    end
+       send_file 'views/index.html'
+  end
+  
+  get '/test' do
+      status = isLoggedIn
+      if status[:login]
+          "Suceess"
+          else
+          "Failed"
+      end
   end
 
    get '/signup' do
