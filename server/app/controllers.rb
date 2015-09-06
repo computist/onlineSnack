@@ -20,7 +20,7 @@ Platform::App.controllers  do
       end
   end
 
-   get '/signup' do
+   post '/signup' do
       if params[:username] && !params[:username].blank? && params[:password] && !params[:password].blank?
         if !User.find_by_username(params[:username])
           User.create(:username => params[:username], :password => params[:password])
@@ -33,7 +33,7 @@ Platform::App.controllers  do
       end
    end
 
-   get '/login' do
+   post '/login' do
       if params[:username] && !params[:username].blank? && params[:password] && !params[:password].blank?
         @user = User.find_by_username(params[:username])
         if @user && @user.password == params[:password]
