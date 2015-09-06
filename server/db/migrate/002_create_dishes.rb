@@ -6,6 +6,7 @@ class CreateDishes < ActiveRecord::Migration
       t.integer :spicy, default:0
       t.decimal :rate
       t.integer :rate_number
+      t.decimal :price
       t.timestamps
     end
     add_index :dishes, :name,             unique: true

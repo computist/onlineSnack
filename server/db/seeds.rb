@@ -15,14 +15,14 @@
 # 	end
 # end
 # shell.say "Bye"
-Dish.create(:name => "À±×Ó¼¦", :location => "ËÄ´¨", :spicy => 5, :rate => 4.1, :rate_number => 12)
-Dish.create(:name => "Ã«ÑªÍú", :location => "ÖØÇì", :spicy => 4, :rate => 3.5, :rate_number => 7)
-Dish.create(:name => "»ğ¹ø", :location => "ËÄ´¨", :spicy => 5, :rate => 4.3, :rate_number => 20)
-Dish.create(:name => "±±¾©¿¾Ñ¼", :location => "±±¾©", :spicy => 0, :rate => 3.4, :rate_number =>16)
-Dish.create(:name => "¿¾È«Ñò", :location => "ĞÂ½®", :spicy => 2, :rate => 4.3, :rate_number => 13)
-Dish.create(:name => "³¦·Û", :location => "¹ãÖİ", :spicy => 0, :rate => 3.2, :rate_number => 17)
-Dish.create(:name => "ºìÉÕÎä²ıÓã", :location => "ºş±±", :spicy => 3, :rate => 3.9, :rate_number => 9)
+Dish.create(:name => "À±×Ó¼¦", :location => "ËÄ´¨", :spicy => 5, :rate => 4.1, :rate_number => 12, :price => 10.5)
+Dish.create(:name => "Ã«ÑªÍú", :location => "ÖØÇì", :spicy => 4, :rate => 3.5, :rate_number => 7, :price => 11.5)
+Dish.create(:name => "»ğ¹ø", :location => "ËÄ´¨", :spicy => 5, :rate => 4.3, :rate_number => 20, :price => 13)
+Dish.create(:name => "±±¾©¿¾Ñ¼", :location => "±±¾©", :spicy => 0, :rate => 3.4, :rate_number =>16, :price => 9.5)
+Dish.create(:name => "¿¾È«Ñò", :location => "ĞÂ½®", :spicy => 2, :rate => 4.3, :rate_number => 13, :price => 11)
+Dish.create(:name => "³¦·Û", :location => "¹ãÖİ", :spicy => 0, :rate => 3.2, :rate_number => 17, :price => 9.5)
+Dish.create(:name => "ºìÉÕÎä²ıÓã", :location => "ºş±±", :spicy => 3, :rate => 3.9, :rate_number => 9, :price => 10)
 r = Random.new
 for i in 1..50
-    Dish.create(:name => "dish" + i.to_s, :location => "USA", :spicy => r.rand(6), :rate => r.rand(0.0..5.0).round(1), :rate_number => r.rand(30))
+    Dish.create(:name => "dish" + i.to_s, :location => "USA", :spicy => r.rand(6), :rate => r.rand(0.0..5.0).round(1), :rate_number => r.rand(30), :price => r.rand(5.0..20.0).round(1))
 end

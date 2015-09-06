@@ -10,10 +10,6 @@ Platform::App.controllers  do
   get :index do
       render 'index'
   end
-
-  get '/navBar.html' do
-    send_file File.join(settings.public_folder, 'javascripts/directives/navBar.html')
-  end
   
   get '/test' do
       status = isLoggedIn
@@ -72,14 +68,15 @@ Platform::App.controllers  do
    end
 
    get '/list' do
-    spicy = 5
-    if params[:spicy] && !params[:spicy].blank?
-      value = params[:spicy].to_i
-      if value <= 5 && value >= 0
-        spicy = value
-      end
-    end
-    @dishes = Dish.select(:name, :location, :spicy, :rate, :rate_number).where("spicy <= ?", spicy)
+    # spicy = 5
+    # if params[:spicy] && !params[:spicy].blank?
+    #   value = params[:spicy].to_i
+    #   if value <= 5 && value >= 0
+    #     spicy = value
+    #   end
+    # end
+    # @dishes = Dish.select(:name, :location, :spicy, :rate, :rate_number).where("spicy <= ?", spicy)
+    @dishes = Dish.select(:name, :location, :spicy, :rate, :rate_number)
     
     if params[:location]
       locations = params[:location].strip.split(",")

@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2) do
     t.integer  "spicy",       default: 0
     t.decimal  "rate"
     t.integer  "rate_number"
+    t.decimal  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
