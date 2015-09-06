@@ -1,0 +1,66 @@
+
+	<div id="img-banner">
+	  <div class="">
+	    <img src="img/banner.jpg" />       
+	    <div class="top-img-text">
+	      <h1>Get A Taste Like Home Again</h1>
+	    </div>
+	     
+		<div class="top-img-login">		
+	    	<input placeholder="User Name" type="text" class="input" ng-model=""></input>
+	    	<input placeholder="Password" type="text" class="input" ng-model=""></input>
+	    	<br />
+	    	<button class="Sign-in-btn btn" ng-click="">Get Your Homemade Meals Now</button>
+	    </div>  
+	    
+	  </div>
+	</div>
+
+
+
+
+
+	<div id="filter">
+		<div class="row">
+			<span>Cuisine: </span>
+			<a href="" ng-click="filters = {}">All</a>
+			<a href="" ng-click="filters.location = ‘四川‘" class="btn">Schuan</a>
+			<a href="" ng-click="filters.location = '北京'" class="btn">Beijing</a>
+			<a href="" ng-click="filters.location = ’重庆‘" class="btn">ChongQing</a>
+		</div>
+		<br />
+		<div class="row">
+			<span>Spicy: </span>
+			<rzslider id="slider"
+				rz-slider-floor = "spicy.floor"
+				rz-slider-ceil = "spicy.ceil"
+				rz-slider-always-show-bar="true"
+				rz-slider-on-change="onSliderChange()">
+			</rzslider>
+		</div>
+		<br />
+		<div class="row">
+			<a href="" ng-click="sortField = rate" class="btn">Rate</a>
+			<a href="" ng-click="sortField = popular" class="btn">Popularity</a>
+			<a href="" ng-click="sortField = time" class="btn">Time</a>
+			<a href="" ng-click="sortField = price" class="btn">price</a>
+		</div>
+	</div>
+
+
+
+
+<div class="col-xs-6 col-md-4 col-lg-4" ng-repeat="item in items | filter:filters | orderBy:sortField" id="item" >
+    <a href="" ng-click="openDetailPage(item)" class="thumbnail">
+      <img ng-src="{{item.images[0]}}" />
+      <div class="caption">
+        <h3 class="pull-right">{{item.name}}</h3>
+        <section>
+        	<p>Rate: {{item.rate}}</p>
+        	<p>Location: {{item.location}}</p>
+		</section>
+      </div><!-- /description -->
+    </a>
+</div><!-- /item -->
+	
+

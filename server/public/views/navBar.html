@@ -1,0 +1,54 @@
+
+<div class="modal fade" id="login" role="dialog">
+  <div role="document" class="login-dialog">
+    <div class="modal-content">
+      <div>
+        <div  class="alert alert-danger">{{error}}</div>
+        <form name="signinForm" role="form" class="ng-pristine ng-invalid ng-invalid-required">
+          <label>E-mail</label>
+          <input type="text" ng-model="email" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required" placeholder="email@example.com" required />
+          <label>Password</label>
+          <input type="password" name="pwd" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required" ng-model="password" placeholder="password" required />
+          <div class="user-agreement"></div>
+          <button type="submit" ng-click="login()">
+            Log in
+          </button>
+          <p ng-show="signin.errors.create" class="text-danger ng-hide">Error</p>
+        </form>
+      </div>
+      <hr class="login-modal-divider">
+      <div class="modal-center">
+        <div class="text-muted">Not have an account？<a href="" ng-click="signin.switchToSignup()">Sign up now!</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="navbar navbar-fixed-top" id="navbar-customized">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse-buttons">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#/" id="logo">Umi</a>
+    </div>
+    <div class="collapse navbar-collapse nav-buttons" id="collapse-buttons">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+        	<a class="btn" role="button" id="login" data-toggle="modal" data-target="#login">
+			<span class="glyphicon glyphicon-user"></span>Log in</a>
+		</li>
+		<li>
+			<a href="" role="button" id="cart" data-toggle=""><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a>
+		</li>
+		<li>
+			<a href="" type="button" class="btn btn-primary btn-xs">Sale Your Tasty</a>
+		</li>
+      </ul>
+    </div>
+  </div>
+</nav>

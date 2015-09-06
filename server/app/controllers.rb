@@ -10,6 +10,10 @@ Platform::App.controllers  do
   get :index do
       render 'index'
   end
+
+  get '/navBar.html' do
+    send_file File.join(settings.public_folder, 'javascripts/directives/navBar.html')
+  end
   
   get '/test' do
       status = isLoggedIn
@@ -121,4 +125,10 @@ Platform::App.controllers  do
     
     @dishes.to_json
    end
+
+#******************************Angular JS Link *****************************
+    get '/navBar.html' do
+      send_file File.join(settings.public_folder, 'views/navBar.html')
+    end
+
 end
