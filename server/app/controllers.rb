@@ -8,6 +8,10 @@ Platform::App.controllers  do
 #  end
 
   get :index do
+      response.set_cookie('XSRF-TOKEN',
+                          :path => '/',
+                          :value => session[:csrf],
+                          :expires => Time.now + 3600*24) if session[:csrf]
       render 'index'
   end
   
@@ -20,37 +24,58 @@ Platform::App.controllers  do
       end
   end
 
+#get '/csrf_token', :provides => :json do
+#  result = {
+#      :csrf => session[:csrf]
+#  }
+#  result.to_json
+#end	
+
+
    post '/signup' do
-      if params[:username] && !params[:username].blank? && params[:password] && !params[:password].blank?
-        if !User.find_by_username(params[:username])
-          User.create(:username => params[:username], :password => params[:password])
-          {status:"success", :username => params[:username]}.to_json
+      data = JSON.parse(request.body.read)
+      if data
+        username = data["username"]
+        password = data["password"]
+        if username  && !username.blank? && password && !password.blank?
+          if !User.find_by_username(username)
+            User.create(:username => username, :password => password)
+            {status:"success", :username => username}.to_json
+          else
+            {status:"Username already exist"}.to_json
+          end
         else
-          {status:"Username already exist"}.to_json
+          {status:"failed"}.to_json
         end
-      else
-        {status:"failed"}.to_json
-      end
+     else
+       {status:"failed"}.to_json
+     end
    end
 
    post '/login' do
-      if params[:username] && !params[:username].blank? && params[:password] && !params[:password].blank?
-        @user = User.find_by_username(params[:username])
-        if @user && @user.password == params[:password]
-          token = p SecureRandom.urlsafe_base64
-          session[:username] = params[:username]
-          session[:access_token] = token
-          @user.access_token = token
-          @user.access_token_create_time = Time.now
-          @user.save
-          {status:"login success", access_token: token}.to_json
+      data = JSON.parse(request.body.read)
+      if data
+        username = data["username"]
+        password = data["password"]
+        if username  && !username.blank? && password && !password.blank?
+          @user = User.find_by_username(username)
+          if @user && @user.password == password
+            token = p SecureRandom.urlsafe_base64
+            session[:username] = username
+            session[:access_token] = token
+            @user.access_token = token
+            @user.access_token_create_time = Time.now
+            @user.save
+            {status:"login success", access_token: token}.to_json
+          else
+            {status:"login failed"}.to_json
+          end
         else
           {status:"login failed"}.to_json
         end
       else
         {status:"login failed"}.to_json
       end
-      
    end
 
    get '/logout' do
