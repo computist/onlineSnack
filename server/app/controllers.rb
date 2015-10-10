@@ -1,4 +1,3 @@
-
 require 'json'
 require 'securerandom'
 
@@ -24,15 +23,7 @@ Platform::App.controllers  do
       end
   end
 
-#get '/csrf_token', :provides => :json do
-#  result = {
-#      :csrf => session[:csrf]
-#  }
-#  result.to_json
-#end	
-
-
-   post '/signup' do
+   post '/signup', :provides => :json do
       data = JSON.parse(request.body.read)
       if data
         username = data["username"]
@@ -45,14 +36,14 @@ Platform::App.controllers  do
             {status:"Username already exist"}.to_json
           end
         else
-          {status:"failed"}.to_json
+          {status:"failed1"}.to_json
         end
      else
-       {status:"failed"}.to_json
+       {status:"failed2"}.to_json
      end
    end
 
-   post '/login' do
+   post '/login', :provides => :json do
       data = JSON.parse(request.body.read)
       if data
         username = data["username"]
@@ -78,7 +69,7 @@ Platform::App.controllers  do
       end
    end
 
-   get '/logout' do
+   get '/logout', :provides => :json do
       if isLoggedIn[:login]
         @user = User.find_by_username(session[:username])
         @user.access_token = nil
@@ -92,20 +83,12 @@ Platform::App.controllers  do
       end
    end
 
-   get '/list' do
-    # spicy = 5
-    # if params[:spicy] && !params[:spicy].blank?
-    #   value = params[:spicy].to_i
-    #   if value <= 5 && value >= 0
-    #     spicy = value
-    #   end
-    # end
-    # @dishes = Dish.select(:name, :location, :spicy, :rate, :rate_number).where("spicy <= ?", spicy)
-    @dishes = Dish.select(:name, :location, :spicy, :rate, :rate_number)
+   get '/list', :provides => :json do
+    @dishes = Dish.select(:id, :name, :store_name, :cuisine, :rate, :price, :img_s)
     
-    if params[:location]
-      locations = params[:location].strip.split(",")
-      @dishes = @dishes.where(location: locations)
+    if params[:cuisine]
+      cuisines = params[:cuisine].strip.split(",")
+      @dishes = @dishes.where(cuisine: cuisines)
     end
     
     sort_string = ""
@@ -146,6 +129,14 @@ Platform::App.controllers  do
     end
     
     @dishes.to_json
+   end
+
+   get '/details', :provides => :json do
+	if params[:id] && !params[:id].blank? && Dish.find_by_id(params[:id])
+		Dish.select(:id, :name, :cuisine, :spicy, :rate, :rate_number, :price, :deliver, :pickup, :img_l, :img_m, :img_s).find_by_id(params[:id]).to_json
+	else
+		{}.to_json
+	end
    end
 
 #******************************Angular JS Link *****************************

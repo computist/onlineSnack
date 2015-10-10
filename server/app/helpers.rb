@@ -24,7 +24,7 @@ module Platform
 	    end
         
         def validSorterOption(sorter_array)
-            options_array = ["name", "location", "spicy", "rate", "rate_number", "price"]
+            options_array = ["name", "cuisine", "spicy", "rate", "rate_number", "price"]
             for i in 0..sorter_array.length-1
                 if !options_array.include?(sorter_array[i])
                     return false

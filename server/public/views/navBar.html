@@ -1,54 +1,99 @@
 
-<div class="modal fade" id="login" role="dialog">
-  <div role="document" class="login-dialog">
-    <div class="modal-content">
-      <div>
-        <div  class="alert alert-danger">{{error}}</div>
-        <form name="signinForm" role="form" class="ng-pristine ng-invalid ng-invalid-required">
-          <label>E-mail</label>
-          <input type="text" ng-model="email" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required" placeholder="email@example.com" required />
-          <label>Password</label>
-          <input type="password" name="pwd" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required" ng-model="password" placeholder="password" required />
-          <div class="user-agreement"></div>
-          <button type="submit" ng-click="login()">
-            Log in
-          </button>
-          <p ng-show="signin.errors.create" class="text-danger ng-hide">Error</p>
-        </form>
-      </div>
-      <hr class="login-modal-divider">
-      <div class="modal-center">
-        <div class="text-muted">Not have an account？<a href="" ng-click="signin.switchToSignup()">Sign up now!</a></div>
-      </div>
+<div class="modal" id="login" role="dialog" ng-controller="LoginController as loginCtrl">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content">
+            <div>
+                <div ng-show="loginCtrl.error" class="alert alert-danger">
+                    {{loginCtrl.error}}
+                </div>
+                <form name="LoginForm" role="form" ng-submit="loginCtrl.login()" class="ng-pristine ng-invalid ng-invalid-required" id="LoginForm">
+                  <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" class="form-control" ng-model="loginCtrl.username" required />
+                    <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+                  </div> 
+
+                  <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" ng-model="loginCtrl.password" required />
+                    <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+                  </div>
+                  <div class="user-agreement"></div><button type="submit">Log in</button>
+                </form>
+            </div>
+            <hr class="login-modal-divider" />
+            <div class="modal-center">
+                <div class="text-muted">
+                    Don't have an account&#65311;<a href="" ng-click="loginCtrl.switchToSignup()">Sign up now!</a>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+</div>
+
+
+<div class="modal" id="signup" role="dialog" ng-controller="SignupController as signupCtrl">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content">
+            <div>
+                <div ng-show="signupCtrl.error" class="alert alert-danger">
+                    {{signupCtrl.error}}
+                </div>
+                <form name="signinForm" role="form" ng-submit="signupCtrl.signup()" class="ng-pristine ng-invalid ng-invalid-required" id="signinForm">
+                  <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" class="form-control" ng-model="signupCtrl.user.username" required />
+                    <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+                  </div>
+                  <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" ng-model="signupCtrl.user.password" required />
+                    <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+                  </div>
+                  <div class="user-agreement"></div><button type="submit">Sign up</button>
+                </form>
+            </div>
+            <hr class="login-modal-divider" />
+            <div class="modal-center">
+                <div class="text-muted">
+                    Already have an account&#65311;<a href="" ng-click="signupCtrl.switchToSignup()">Log in now!</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 
-<nav class="navbar navbar-fixed-top" id="navbar-customized">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse-buttons">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#/" id="logo">Umi</a>
-    </div>
-    <div class="collapse navbar-collapse nav-buttons" id="collapse-buttons">
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-        	<a class="btn" role="button" id="login" data-toggle="modal" data-target="#login">
-			<span class="glyphicon glyphicon-user"></span>Log in</a>
-		</li>
-		<li>
-			<a href="" role="button" id="cart" data-toggle=""><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a>
-		</li>
-		<li>
-			<a href="" type="button" class="btn btn-primary btn-xs">Sale Your Tasty</a>
-		</li>
-      </ul>
-    </div>
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-customized">
+  <div class="container" ng-controller="NavBarController as navBarCtrl">
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse-buttons"></button> <a class="navbar-brand" href="#/" id="logo" name="logo">Umi</a>
+      </div>
+      <div class="collapse navbar-collapse nav-buttons" id="collapse-buttons">
+          <ul class="nav navbar-nav navbar-right">
+              
+              <li ng-if="!globals.currentUser">
+                  <a href="" role="button" id="signup" data-toggle="modal" data-target="#signup" name="login"><span class="nav-bar-btn">Sign up</span></a>
+              </li>
+              <li ng-if="!globals.currentUser">
+                  <a href="" role="button" id="login" data-toggle="modal" data-target="#login" name="login"><span class="nav-bar-btn">Log in</span></a>
+              </li>
+
+              <li class="dropdown" ng-if="globals.currentUser">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="">Hi, {{globals.currentUser.username}} <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="">Your Order</a></li>
+                    <li><a href="">Edit Profile</a></li>
+                    <li><a href="" ng-click="navBarCtrl.logout()">Log Out</a></li>
+                  </ul>
+              </li>
+
+            
+              <li>
+                  <a href="#/foods/new" class="join-us-btn"><span class="nav-bar-btn">List Your Tasty</span></a>
+              </li>
+          </ul>
+      </div>
   </div>
 </nav>

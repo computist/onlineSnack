@@ -14,12 +14,18 @@
 ActiveRecord::Schema.define(version: 2) do
 
   create_table "dishes", force: :cascade do |t|
-    t.string   "name",                    null: false
-    t.string   "location"
+    t.string   "name",                        null: false
+    t.string   "store_name"
+    t.string   "cuisine"
     t.integer  "spicy",       default: 0
     t.decimal  "rate"
     t.integer  "rate_number"
     t.decimal  "price"
+    t.boolean  "deliver",     default: false
+    t.boolean  "pickup",      default: false
+    t.string   "img_l"
+    t.string   "img_m"
+    t.string   "img_s"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

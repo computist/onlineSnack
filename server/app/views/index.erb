@@ -1,40 +1,56 @@
 <!DOCTYPE html>
-<html ng-app="BasicHttpAuthExample">
+<html ng-app="umi">
+	<head>
+		<meta charset="utf-8">
+		<title>Umi</title>
 
-  <head>
-    <meta charset="utf-8" />
-    <title>AngularJS Basic HTTP Authentication Example</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
-  </head>
+		
+		<!-- Mobile viewport optimized -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		
+		<!-- Bootstrap CSS -->
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/vendor/bootstrap-glyphicons.css" rel="stylesheet">
+		<!-- Vendor CSS-->
 
-  <body>
-  
-    <div class="jumbotron">
-      <div class="container">
-        <div class="col-xs-offset-2 col-xs-8">
-          <div ng-view></div>
-        </div>
-      </div>
-    </div>
+		<!-- Custom CSS -->
+		<link href="css/main.css" rel="stylesheet">
+		
+		
+	</head>
 
-    <div class="credits text-center">
-      <p>
-          <a href="http://jasonwatmore.com/post/2014/05/26/AngularJS-Basic-HTTP-Authentication-Example.aspx">AngularJS Basic HTTP Authentication Example</a>
-      </p>
-      <p>
-        <a href="http://jasonwatmore.com">JasonWatmore.com</a>
-      </p>
-    </div>
+	<body>
+	    <div class="wrapper ng-cloak">
+	    	<div ng-include="'views/navBar.html'"></div>
+			<div ng-view autoscroll=true></div>
+			<footer ng-include="'views/footer.html'"></footer>
+		</div>
+		
 
-    <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
-    <script src="//code.angularjs.org/1.2.20/angular.js"></script>
-    <script src="//code.angularjs.org/1.2.20/angular-route.js"></script>
-    <script src="//code.angularjs.org/1.2.13/angular-cookies.js"></script>
+		<!--  Vendors-->
+		<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+		<script src="//code.angularjs.org/1.2.20/angular-route.js"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="//code.angularjs.org/1.4.7/angular-cookies.min.js"></script>
 
-    <%= javascript_include_tag 'scripts/app' %>
-    <%= javascript_include_tag 'modules/authentication/services' %>
-    <%= javascript_include_tag 'modules/authentication/controllers' %>
-    <%= javascript_include_tag 'modules/home/controllers' %>
-  </body>
+		<!-- Modules -->
+		<%= javascript_include_tag 'app' %>
 
+		<!-- Controllers -->
+		<%= javascript_include_tag 'controllers/MainController' %>
+		<%= javascript_include_tag 'controllers/ItemController' %>
+		<%= javascript_include_tag 'controllers/LoginController' %>
+		<%= javascript_include_tag 'controllers/NavBarController' %>
+		<%= javascript_include_tag 'controllers/SignupController' %>
+		<%= javascript_include_tag 'controllers/NewPartnerController' %>
+		<!-- Directives -->
+
+
+		<!-- Services -->
+		<%= javascript_include_tag 'services/ItemsService' %>
+		<%= javascript_include_tag 'services/AuthenticationService' %>
+		<%= javascript_include_tag 'services/userService' %>
+		<%= javascript_include_tag 'services/flashService' %>
+	</body>
 </html>
