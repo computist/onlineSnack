@@ -28,18 +28,22 @@ Platform::App.controllers  do
       if data
         username = data["username"]
         password = data["password"]
-        if username  && !username.blank? && password && !password.blank?
+        if username && !username.blank? && password && !password.blank?
           if !User.find_by_username(username)
-            User.create(:username => username, :password => password)
-            {status:"success", :username => username}.to_json
+            if username.length >= 6 && username.length < 20 && password.length >= 8 && password.length <= 20 && /[A-Z]/.match(password) && /[a-z]/.match(password) && /[0-9]/.match(password)
+              User.create(:username => username, :password => password)
+              {status:"success", :username => username}.to_json
+            else
+	      {status:"password complexity error"}
+	    end
           else
             {status:"Username already exist"}.to_json
           end
         else
-          {status:"failed1"}.to_json
+          {status:"failed"}.to_json
         end
      else
-       {status:"failed2"}.to_json
+       {status:"failed"}.to_json
      end
    end
 
@@ -86,6 +90,10 @@ Platform::App.controllers  do
    get '/list', :provides => :json do
     @dishes = Dish.select(:id, :name, :store_name, :cuisine, :rate, :price, :img_s)
     
+    if params[:name]
+      @dishes = @dishes.where('name LIKE ?', '%'+params[:name]+'%')
+    end
+
     if params[:cuisine]
       cuisines = params[:cuisine].strip.split(",")
       @dishes = @dishes.where(cuisine: cuisines)
