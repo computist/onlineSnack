@@ -5,8 +5,8 @@
         .module('umi')
         .controller('SignupController', SignupController);
 
-    SignupController.$inject = ['UserService', '$location', '$rootScope'];
-    function SignupController(UserService, $location, $rootScope) {
+    SignupController.$inject = ['UserService', '$location', '$rootScope', '$uibModalInstance'];
+    function SignupController(UserService, $location, $rootScope, $uibModalInstance) {
         var signupCtrl = this;
 
         signupCtrl.signup = signup;
@@ -15,7 +15,7 @@
             UserService.Create(signupCtrl.user)
                 .then(function (response) {
                      if (response.data.status == 0) {
-                        $(".modal").modal("hide");
+                        $uibModalInstance.dismiss('cancel');
                     } else if (response.data.status == 1){
                         signupCtrl.error = "E-mail address has already exsit";
                     } else if (response.data.status == 2){

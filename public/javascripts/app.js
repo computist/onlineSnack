@@ -30,14 +30,20 @@
         $http.defaults.headers.common['X-CSRF-Token'] = $cookies.get('XSRF-TOKEN');
         // keep user logged in after page refresh
         $rootScope.globals = {};
+        $rootScope.globals.cart = {};
         if($cookies.get('globals')){
             $rootScope.globals = $cookies.getObject('globals');
-        }
+        };
+        if ($cookies.get('cart')) {
+            $rootScope.globals.cart = $cookies.getObject('cart');
+        } else {
+            $rootScope.globals.cart = {};
+        };
 
         //$rootScope.globals = $cookies.get('globals') || {};
         if ($rootScope.globals.currentUser) {
             $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
-        }
+        }        
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and trying to access a restricted page

@@ -5,12 +5,22 @@
         .module('umi')
         .controller('GlobalCartController', GlobalCartController);
 
-    GlobalCartController.$inject = ['$scope'];
-    function GlobalCartController($scope) {
+    GlobalCartController.$inject = ['$scope', '$rootScope', 'ItemService'];
+    function GlobalCartController($scope, $rootScope, ItemService) {
     	var globalCartCtrl = this;
-    	globalCartCtrl.cancel = cancel;
+        globalCartCtrl.remove = remove;
+        globalCartCtrl.addQuantity = addQuantity;
+    	globalCartCtrl.checkOut = checkOut;
 
-    	function cancel() {
+        function remove(item) {
+            ItemService.removeFromGlobalCart(item);
+        };
+
+        function addQuantity() {
+
+        };
+
+    	function checkOut() {
     	};
 
     };

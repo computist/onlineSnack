@@ -3,7 +3,10 @@ class CreateOrders < ActiveRecord::Migration
     create_table :orders do |t|
       t.integer :user_id
       t.text :items
-      # format: dish_id:number_dish2_id:number_...
+      # format: id:name:price:number_id2:name2:price2:number2
+      t.integer :price
+      # in cent
+      t.integer :item_count
       t.boolean :paid
       t.integer :status
       # 1 open 0 finish 2 cancelled

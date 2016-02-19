@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 3) do
     t.integer  "spicy",       default: 0
     t.decimal  "rate"
     t.integer  "rate_number"
-    t.decimal  "price"
+    t.integer  "price"
     t.boolean  "reserve",     default: false
     t.boolean  "deliver",     default: false
     t.boolean  "pickup",      default: false
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 3) do
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "items"
+    t.integer  "price"
+    t.integer  "item_count"
     t.boolean  "paid"
     t.integer  "status"
     t.datetime "created_at"

@@ -5,8 +5,8 @@
         .module('umi')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$location', 'AuthenticationService', 'FlashService'];
-    function LoginController($location, AuthenticationService, FlashService) {
+    LoginController.$inject = ['$location', 'AuthenticationService', 'FlashService','$uibModalInstance','ItemService'];
+    function LoginController($location, AuthenticationService, FlashService, $uibModalInstance, ItemService) {
         var loginCtrl = this;
 
         loginCtrl.login = login;
@@ -16,7 +16,8 @@
             AuthenticationService.Login(loginCtrl.username, loginCtrl.password, function (response) {
                 if (response.status == 0) {
                     AuthenticationService.SetCredentials(loginCtrl.username, loginCtrl.password);
-                    $(".modal").modal("hide");
+                    $uibModalInstance.dismiss('cancel');
+                    ItemService.getCart();
                 } else if (response.status == 1) {
                     loginCtrl.error = "Your E-mail or Password is wrong. Please try again.";
                 } else if (response.status == 2) {

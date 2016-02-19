@@ -7,7 +7,7 @@ class CreateDishes < ActiveRecord::Migration
       t.integer :spicy, default:0
       t.decimal :rate
       t.integer :rate_number
-      t.decimal :price
+      t.integer :price # cent
       t.boolean :reserve, default: false
       t.boolean :deliver, default: false
       t.boolean :pickup, default: false

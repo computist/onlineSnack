@@ -31,6 +31,35 @@ module Platform
             end
             return true
         end
+	
+	def validateCart(cartStr)
+		cart = cartStr.split("_")
+		validCart = ""
+		success = 0
+		failed = 0
+                cart.each do |item|
+                        item_info = item.split(":")
+                        if item_info.count == 4
+                                # valid entry
+                                dish = Dish.find_by_id(item_info[0])
+                                if dish
+                                        if validCart != ""
+                                                validCart += "_"
+                                        end
+                                        validCart += dish.id.to_s + ":" + dish.name + ":" + dish.price.to_s + ":"
+                                        if item_info[3].to_i <= 0
+                                                validCart += "1"
+                                        else
+                                                validCart += item_info[3].to_i.to_s
+                                        end
+					success += 1
+					next
+                                end
+                        end
+			failed += 1
+                end
+		return validCart, success, failed
+	end
     end
 
     helpers Helper

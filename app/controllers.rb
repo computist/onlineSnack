@@ -15,6 +15,8 @@ WRONG_PASSWORD = 1
 INVALID_INPUT = 2
 
 HAVENT_LOG_IN = 1
+REQUEST_FAILED = 1
+PARTIAL_SUCCESS = 2
 
   get :index do
       response.set_cookie('XSRF-TOKEN',
@@ -34,7 +36,8 @@ HAVENT_LOG_IN = 1
 
         if email && !email.blank? && password && !password.blank? && first_name && !first_name.blank? && last_name && !last_name.blank?
           if !User.find_by_email(email)
-            if VALID_EMAIL_REGEX.match(email) && password.length >= 8 && password.length <= 20 && /[A-Z]/.match(password) && /[a-z]/.match(password) && /[0-9]/.match(password)
+            #if VALID_EMAIL_REGEX.match(email) && password.length >= 8 && password.length <= 20 && /[A-Z]/.match(password) && /[a-z]/.match(password) && /[0-9]/.match(password)
+	  if VALID_EMAIL_REGEX.match(email) && password.length >= 8 && password.length <= 20 && (/[A-Z]/.match(password) || /[a-z]/.match(password)) && /[0-9]/.match(password)
               User.create(:email => email, :password => password, :first_name => first_name, :last_name => last_name)
               {status:REQUEST_SUCCESS, :email => email}.to_json
             elsif !VALID_EMAIL_REGEX.match(email)
@@ -184,8 +187,13 @@ HAVENT_LOG_IN = 1
 	status = isLoggedIn
 	if status[:login] && params[:order] && !params[:order].blank?
 		#need validate order format
-		Order.create(:user_id => status[:user_id], :items => params[:order].strip)
-		{status:REQUEST_SUCCESS}.to_json
+		validOrder, success, failed = validateCart(params[:order]).strip
+		if validOrder.length > 0 && failed == 0 && success > 0
+			Order.create(:user_id => status[:user_id], :items => validOrder)
+			{status:REQUEST_SUCCESS}.to_json
+		else
+			{status:FAILED, valid: success, invalid: failed}.to_json
+		end
 	else
 		{status:FAILED}.to_json
 	end
@@ -193,6 +201,29 @@ HAVENT_LOG_IN = 1
 
    get :cuisines, :provides => :json do
 	Dish.select(:cuisine).uniq.to_json
+   end
+   
+   get :updatecart, :provides => :json do
+	status = isLoggedIn
+        if status[:login] && params[:cart]
+		validCart, success, failed = validateCart(params[:cart])	
+		user = User.find_by_email(session[:email])
+		user.cart = validCart
+		user.save
+		{status:REQUEST_SUCCESS}.to_json
+	else
+		{status:REQUEST_FAILED}.to_json
+	end
+   end
+
+   get :getcart, :provides => :json do
+	status = isLoggedIn
+        if status[:login]
+                user = User.find_by_email(session[:email])
+		{status:REQUEST_SUCCESS, cart:user.cart}.to_json
+        else
+		{status:REQUEST_FAILED}.to_json
+	end
    end
 
 end

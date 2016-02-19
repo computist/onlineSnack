@@ -16,8 +16,8 @@
     		asc: false
     	};
 
-    	homeCtrl.deliver = 0;
-    	homeCtrl.reserve = 0;
+    	homeCtrl.deliver;
+    	homeCtrl.reserve;
 
     	homeCtrl.loaded = false;
         homeCtrl.noItem = false;
@@ -74,14 +74,19 @@
         		api = "sort_asc=" + homeCtrl.sorting.value;
         	} else {
         		api = "sort_desc=" + homeCtrl.sorting.value;
-        	}
+        	};
 
         	if(homeCtrl.cuisine) {
         		api += "&cuisine=" + homeCtrl.cuisine;
         	};
+            if (homeCtrl.deliver || homeCtrl.deliver == 0) {
+                api += "&deliver=" + homeCtrl.deliver;
+            };
+            console.log(homeCtrl.deliver);
+            if (homeCtrl.reserve || homeCtrl.reserve == 0) {
+                api += "&reserve=" + homeCtrl.reserve;
+            };
 
-        	api += "&deliver=" + homeCtrl.deliver;
-        	api += "&reserve=" + homeCtrl.reserve;
 
         	console.log(api);
 
